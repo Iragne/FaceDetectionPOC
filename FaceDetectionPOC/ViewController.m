@@ -12,18 +12,29 @@
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+
+#define MAX_NB 4
+
 static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
-@interface ViewController ()
+@interface ViewController (){
+    CGFloat xs[MAX_NB];
+    CGFloat ys[MAX_NB];
+    CGFloat ws[MAX_NB];
+    CGFloat hs[MAX_NB];
+
+}
 
 @property (nonatomic) BOOL isUsingFrontFacingCamera;
 @property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;
 @property (nonatomic) dispatch_queue_t videoDataOutputQueue;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property (nonatomic, strong) AVCaptureConnection   *avConnexion;
 
 @property (nonatomic, strong) UIImage *borderImage;
 @property (nonatomic, strong) CIDetector *faceDetector;
 
+//@property (nonatomic, assign) CGFloat xs[5];
 
 - (void)setupAVCapture;
 - (void)teardownAVCapture;
@@ -112,9 +123,9 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
         [[self.videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:YES]; 
 
         self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-        self.previewLayer.backgroundColor = [[UIColor blackColor] CGColor];
+        self.previewLayer.backgroundColor = [[UIColor clearColor] CGColor];
         self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-        
+        self.previewLayer.contentsGravity = @"resizeAspectFill";
         CALayer *rootLayer = [self.previewView layer];
         [rootLayer setMasksToBounds:YES];
         [self.previewLayer setFrame:[rootLayer bounds]];
@@ -140,7 +151,8 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 {
 	self.videoDataOutput = nil;
 	if (self.videoDataOutputQueue) {
-		dispatch_release(self.videoDataOutputQueue);
+//		dispatch_release(self.videoDataOutputQueue);
+        self.videoDataOutputQueue = nil;
     }
 	[self.previewLayer removeFromSuperlayer];
 	self.previewLayer = nil;
@@ -207,6 +219,8 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 	return videoBox;
 }
 
+
+
 // called asynchronously as the capture output is capturing sample buffers, this method asks the face detector
 // to detect features and for each draw the green border in a layer and set appropriate orientation
 - (void)drawFaces:(NSArray *)features 
@@ -220,20 +234,21 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	
-	// hide all the face layers
-	for ( CALayer *layer in sublayers ) {
-		if ( [[layer name] isEqualToString:@"FaceLayer"] )
-			[layer setHidden:YES];
-	}	
 	
+    for ( CALayer *layer in sublayers ) {
+        if ( [[layer name] isEqualToString:@"FaceLayer"] )
+            [layer setHidden:YES];
+    }
+    
 	if ( featuresCount == 0 ) {
+        // hide all the face layers
 		[CATransaction commit];
 		return; // early bail.
 	}
     
 	CGSize parentFrameSize = [self.previewView frame].size;
 	NSString *gravity = [self.previewLayer videoGravity];
-	BOOL isMirrored = [self.previewLayer isMirrored];
+	BOOL isMirrored = ![self.avConnexion isVideoMirrored];
 	CGRect previewBox = [ViewController videoPreviewBoxForGravity:gravity 
                                                         frameSize:parentFrameSize 
                                                      apertureSize:clearAperture.size];
@@ -251,6 +266,7 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 		temp = faceRect.origin.x;
 		faceRect.origin.x = faceRect.origin.y;
 		faceRect.origin.y = temp;
+        
 		// scale coordinates so they fit in the preview box, which may be scaled
 		CGFloat widthScaleBy = previewBox.size.width / clearAperture.size.height;
 		CGFloat heightScaleBy = previewBox.size.height / clearAperture.size.width;
@@ -277,12 +293,66 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 		
 		// create a new one if necessary
 		if ( !featureLayer ) {
-			featureLayer = [[CALayer alloc]init];
+			featureLayer = [[CALayer alloc] init];
 			featureLayer.contents = (id)self.borderImage.CGImage;
 			[featureLayer setName:@"FaceLayer"];
+            featureLayer.contentsGravity = @"resizeAspectFill";
+//            featureLayer.borderColor = [UIColor redColor].CGColor;
+//            featureLayer.borderWidth = 4;
 			[self.previewLayer addSublayer:featureLayer];
 			featureLayer = nil;
 		}
+        // smooth added by JA
+        CGFloat sx = 0;
+        CGFloat sy = 0;
+        CGFloat sw = 0;
+        CGFloat sh = 0;
+        for (int i =  MAX_NB - 1; i > 0; i--) {
+            if (xs[i - 1]){
+                sx += xs[ i - 1];
+            }
+            xs[i] = xs[i - 1];
+        }
+        sx += faceRect.origin.x;
+        xs[0] = faceRect.origin.x;
+
+        for (int i =  MAX_NB - 1; i > 0; i--) {
+            if (ys[ i - 1]){
+                sy += ys[ i - 1];
+            }
+            ys[i] = ys[ i - 1];
+        }
+        sy += faceRect.origin.y;
+        ys[0] = faceRect.origin.y;
+        
+        for (int i =  MAX_NB - 1; i > 0; i--) {
+            if (ws[ i - 1]){
+                sw += ws[ i - 1];
+            }
+            ws[i] = ws[ i - 1];
+        }
+        sw += faceRect.size.width;
+        ws[0] = faceRect.size.width;
+        
+        
+        for (int i =  MAX_NB - 1; i > 0; i--) {
+            if (hs[ i - 1]){
+                sh += hs[ i - 1];
+            }
+            hs[i] = hs[ i - 1];
+        }
+        sh += faceRect.size.height;
+        hs[0] = faceRect.size.height;
+
+        
+        faceRect.origin.x = (CGFloat)( sx / (MAX_NB));
+        faceRect.origin.y = (CGFloat)( sy / (MAX_NB));
+        
+        faceRect.size.width = (CGFloat)( sw / (MAX_NB));
+        faceRect.size.height = (CGFloat)( sh / (MAX_NB));
+//        NSLog(@" %f, %f, %f", xs[0], faceRect.origin.x, sx);
+        
+//        [CATransaction setAnimationDuration:0.01];
 		[featureLayer setFrame:faceRect];
 		
 		switch (orientation) {
@@ -358,7 +428,8 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 - (void)captureOutput:(AVCaptureOutput *)captureOutput 
     didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer 
        fromConnection:(AVCaptureConnection *)connection
-{	
+{
+    self.avConnexion = connection;
 	// get the image
 	CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 	CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, kCMAttachmentMode_ShouldPropagate);
@@ -401,11 +472,16 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 	// Do any additional setup after loading the view, typically from a nib.
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+
+	
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self setupAVCapture];
+    self.borderImage = [UIImage imageNamed:@"border"];
     
-	[self setupAVCapture];
-	self.borderImage = [UIImage imageNamed:@"border"];
-	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
-	self.faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
+    NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
+    self.faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
 }
 
 - (void)viewDidUnload
