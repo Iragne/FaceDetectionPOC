@@ -298,7 +298,7 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 			[featureLayer setName:@"FaceLayer"];
             featureLayer.contentsGravity = @"resizeAspectFill";
 //            featureLayer.borderColor = [UIColor redColor].CGColor;
-//            featureLayer.borderWidth = 4;
+//            featureLayer.borderWidth = 1;
 			[self.previewLayer addSublayer:featureLayer];
 			featureLayer = nil;
 		}
@@ -346,7 +346,7 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
         
         faceRect.origin.x = (CGFloat)( sx / (MAX_NB));
-        faceRect.origin.y = (CGFloat)( sy / (MAX_NB));
+        faceRect.origin.y = (CGFloat)( sy / (MAX_NB)) - 10;
         
         faceRect.size.width = (CGFloat)( sw / (MAX_NB));
         faceRect.size.height = (CGFloat)( sh / (MAX_NB));
@@ -478,7 +478,7 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self setupAVCapture];
-    self.borderImage = [UIImage imageNamed:@"border"];
+    self.borderImage = [UIImage imageNamed:@"mask"];
     
     NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
     self.faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];

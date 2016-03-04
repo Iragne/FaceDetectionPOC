@@ -26,6 +26,7 @@
 		DBD149AA1C89C7BB00249202 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD149A61C89C7BB00249202 /* Security.framework */; };
 		DBD149AB1C89C7BB00249202 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD149A71C89C7BB00249202 /* SystemConfiguration.framework */; };
 		DBD149AF1C89C9CC00249202 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD149AE1C89C9CC00249202 /* Launch Screen.xib */; };
+		DBD149B31C89D97400249202 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD149B21C89D97400249202 /* mask.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		DBD149A61C89C7BB00249202 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DBD149A71C89C7BB00249202 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DBD149AE1C89C9CC00249202 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		DBD149B21C89D97400249202 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				36CE7318154EB9530050104C /* AppDelegate.m */,
 				DBD149A31C89BDE900249202 /* Default-568h@2x.png */,
 				36CE731A154EB9530050104C /* ViewController.h */,
+				DBD149B21C89D97400249202 /* mask.png */,
 				36CE731B154EB9530050104C /* ViewController.m */,
 				36CE731D154EB9530050104C /* ViewController.xib */,
 				36A54B061551440600A67D3D /* border.png */,
@@ -201,6 +204,7 @@
 				36CE731F154EB9530050104C /* ViewController.xib in Resources */,
 				36A54B071551440600A67D3D /* border.png in Resources */,
 				DBD149AF1C89C9CC00249202 /* Launch Screen.xib in Resources */,
+				DBD149B31C89D97400249202 /* mask.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
