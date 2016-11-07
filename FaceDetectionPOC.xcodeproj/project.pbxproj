@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DFF76BD1DAC561C00D22D2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DFF76BC1DAC561C00D22D2A /* Launch Screen.storyboard */; };
 		36A54B071551440600A67D3D /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A54B061551440600A67D3D /* border.png */; };
 		36CE7309154EB9530050104C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CE7308154EB9530050104C /* UIKit.framework */; };
 		36CE730B154EB9530050104C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CE730A154EB9530050104C /* Foundation.framework */; };
@@ -22,14 +23,13 @@
 		36CE7330154EBB0E0050104C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CE732F154EBB0E0050104C /* CoreVideo.framework */; };
 		36CE7336154EBB550050104C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CE7335154EBB550050104C /* AVFoundation.framework */; };
 		36CE7338154EBB610050104C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CE7337154EBB610050104C /* ImageIO.framework */; };
-		DBD149A41C89BDE900249202 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD149A31C89BDE900249202 /* Default-568h@2x.png */; };
 		DBD149AA1C89C7BB00249202 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD149A61C89C7BB00249202 /* Security.framework */; };
 		DBD149AB1C89C7BB00249202 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD149A71C89C7BB00249202 /* SystemConfiguration.framework */; };
-		DBD149AF1C89C9CC00249202 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD149AE1C89C9CC00249202 /* Launch Screen.xib */; };
 		DBD149B31C89D97400249202 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD149B21C89D97400249202 /* mask.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DFF76BC1DAC561C00D22D2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		36A54B061551440600A67D3D /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
 		36CE7304154EB9530050104C /* FaceDetectionPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceDetectionPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CE7308154EB9530050104C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -50,10 +50,8 @@
 		36CE732F154EBB0E0050104C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		36CE7335154EBB550050104C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		36CE7337154EBB610050104C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		DBD149A31C89BDE900249202 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../../../Downloads/SquareCam/Default-568h@2x.png"; sourceTree = "<group>"; };
 		DBD149A61C89C7BB00249202 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DBD149A71C89C7BB00249202 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		DBD149AE1C89C9CC00249202 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		DBD149B21C89D97400249202 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,14 +117,12 @@
 			children = (
 				36CE7317154EB9530050104C /* AppDelegate.h */,
 				36CE7318154EB9530050104C /* AppDelegate.m */,
-				DBD149A31C89BDE900249202 /* Default-568h@2x.png */,
 				36CE731A154EB9530050104C /* ViewController.h */,
 				DBD149B21C89D97400249202 /* mask.png */,
 				36CE731B154EB9530050104C /* ViewController.m */,
 				36CE731D154EB9530050104C /* ViewController.xib */,
 				36A54B061551440600A67D3D /* border.png */,
 				36CE730F154EB9530050104C /* Supporting Files */,
-				DBD149AE1C89C9CC00249202 /* Launch Screen.xib */,
 			);
 			path = FaceDetectionPOC;
 			sourceTree = "<group>";
@@ -138,6 +134,7 @@
 				36CE7311154EB9530050104C /* InfoPlist.strings */,
 				36CE7314154EB9530050104C /* main.m */,
 				36CE7316154EB9530050104C /* FaceDetectionPOC-Prefix.pch */,
+				2DFF76BC1DAC561C00D22D2A /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,7 +149,6 @@
 				36CE7300154EB9530050104C /* Sources */,
 				36CE7301154EB9530050104C /* Frameworks */,
 				36CE7302154EB9530050104C /* Resources */,
-				DBD149A51C89C77F00249202 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -200,31 +196,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				36CE7313154EB9530050104C /* InfoPlist.strings in Resources */,
-				DBD149A41C89BDE900249202 /* Default-568h@2x.png in Resources */,
 				36CE731F154EB9530050104C /* ViewController.xib in Resources */,
 				36A54B071551440600A67D3D /* border.png in Resources */,
-				DBD149AF1C89C9CC00249202 /* Launch Screen.xib in Resources */,
+				2DFF76BD1DAC561C00D22D2A /* Launch Screen.storyboard in Resources */,
 				DBD149B31C89D97400249202 /* mask.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		DBD149A51C89C77F00249202 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "./Fabric.framework/run b868f1522d86cac91d75bee612f58adc9bdd78f5 52dd79763bd1ff94b81690933166d9b6cf9e35d5a04cd8b8b2132b80a38251e3";
-			shellScript = "./Fabric.framework/run b868f1522d86cac91d75bee612f58adc9bdd78f5 52dd79763bd1ff94b81690933166d9b6cf9e35d5a04cd8b8b2132b80a38251e3";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		36CE7300154EB9530050104C /* Sources */ = {
@@ -342,7 +321,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adelskott.test.face;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -363,7 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adelskott.test.face;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dcae0709-d32b-40e0-b3b8-4175489adb7d";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
